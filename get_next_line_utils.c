@@ -25,7 +25,7 @@ void	ft_clear_buffer(char *buffer)
 
 size_t	ft_line_length(const char *str)
 {
-	size_t len;
+	size_t	len;
 
 	len = 0;
 	if (!str || !str[len])
@@ -35,7 +35,7 @@ size_t	ft_line_length(const char *str)
 		if (len > 0)
 		{
 			if (str[len - 1] == '\n')
-				break;
+				break ;
 		}
 		len++;
 	}
