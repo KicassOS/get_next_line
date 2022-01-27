@@ -41,3 +41,18 @@ size_t	ft_line_length(const char *str)
 	}
 	return (len);
 }
+
+char	ft_no_newline_found(char *buffer)
+{
+	size_t	length;
+	size_t	i;
+
+	length = ft_line_length(buffer);
+	i = 0;
+	while (i < length)
+	{
+		if (buffer[i++] == '\n')
+			return (0);
+	}
+	return (1);
+}

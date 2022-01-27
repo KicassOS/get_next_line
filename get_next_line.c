@@ -17,7 +17,6 @@ char	*get_next_line(int fd)
 {
 	char			*buffer;
 	ssize_t			bytes_read;
-	static ssize_t	position;
 
 	if (fd < 0)
 		return (NULL);
@@ -26,20 +25,31 @@ char	*get_next_line(int fd)
 		return (NULL);
 	ft_clear_buffer(buffer);
 	bytes_read = 1;
-	position = 0;
-	while (bytes_read)
+	while (bytes_read && ft_no_newline_found(buffer))
 	{
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
-		position += ft_read__until_newline(buffer);
+		if (ft_read_until_newline(buffer))
+			return (buffer);
 	}
-	return (buffer);
+	return (0);
 }
 
-ssize_t	ft_read_until_newline(char *buffer)
+char	*ft_read_until_newline(char *buffer)
 {
 	size_t	line_length;
+	size_t	i;
 
 	line_length = ft_line_length(buffer);
-	printf("%lu\n", line_length);
-	return (line_length);
+	while (i < line_length && buffer[i])
+	{
+		if (buffer[i++] == '\n')
+		{
+			if (buffer[i + 1])
+			{
+				buffer[i + 1] = '\0';
+				return (buffer);
+			}
+		}
+	}
+	return (NULL);
 }
