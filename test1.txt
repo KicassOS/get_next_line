@@ -1,0 +1,3 @@
+this is a test
+	this is a newline that's tabbed
+andt this is the last line
