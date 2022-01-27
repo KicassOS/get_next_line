@@ -32,6 +32,7 @@ int main(int argc, char **argv)
 			printf("Line number %ld: %s\n", line_number, current_line);
 			line_number++;
 		}
+		close(fd);
 	}
 	else
 	{
