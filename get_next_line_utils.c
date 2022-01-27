@@ -12,4 +12,32 @@
 
 #include "get_next_line.h"
 
+void	ft_clear_buffer(char *buffer)
+{
+	ssize_t	i;
 
+	i = 0;
+	while (i < BUFFER_SIZE)
+	{
+		buffer[i++] = '\0';
+	}
+}
+
+size_t	ft_line_length(const char *str)
+{
+	size_t len;
+
+	len = 0;
+	if (!str || !str[len])
+		return (0);
+	while (str[len])
+	{
+		if (len > 0)
+		{
+			if (str[len - 1] == '\n')
+				break;
+		}
+		len++;
+	}
+	return (len);
+}

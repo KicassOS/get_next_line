@@ -16,6 +16,12 @@
 # include <unistd.h>
 # include <stdlib.h>
 
+// get_next_line.c
 char	*get_next_line(int fd);
+ssize_t	ft_read_until_newline(char *buffer);
+
+//get_next_line_utils.c
+size_t	ft_line_length(const char *str);
+void	ft_clear_buffer(char *buffer);
 
 #endif
