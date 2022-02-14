@@ -6,21 +6,27 @@
 /*   By: pszleper <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 16:24:53 by pszleper          #+#    #+#             */
-/*   Updated: 2022/01/26 16:24:53 by pszleper         ###   ########.fr       */
+/*   Updated: 2022/02/12 05:16:07 by pszleper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-void	ft_clear_buffer(char *buffer)
+void	*ft_calloc(size_t count, size_t size)
 {
-	ssize_t	i;
+	char		*ptr;
+	size_t		i;
 
 	i = 0;
-	while (i < BUFFER_SIZE)
+	ptr = malloc(size * count);
+	if (!ptr)
+		return (NULL);
+	while (i < size * count)
 	{
-		buffer[i++] = '\0';
+		ptr[i] = 0;
+		i++;
 	}
+	return (ptr);
 }
 
 size_t	ft_line_length(const char *str)
@@ -55,4 +61,24 @@ char	ft_no_newline_found(char *buffer)
 			return (0);
 	}
 	return (1);
+}
+
+size_t	ft_nl_index(char *buffer)
+{
+	size_t	line_length;
+	size_t	i;
+
+	i = 0;
+	while (buffer[i])
+	{
+		if (buffer[i] == '\n')
+		{
+			if (buffer[i])
+			{
+				return (i);
+			}
+		}
+		i++;
+	}
+	return (-1);
 }

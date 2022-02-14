@@ -6,7 +6,7 @@
 /*   By: pszleper <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 16:24:59 by pszleper          #+#    #+#             */
-/*   Updated: 2022/01/26 16:24:59 by pszleper         ###   ########.fr       */
+/*   Updated: 2022/02/12 05:16:28 by pszleper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ char	*ft_read_until_newline(char *buffer);
 
 //get_next_line_utils.c
 size_t	ft_line_length(const char *str);
-void	ft_clear_buffer(char *buffer);
 char	ft_no_newline_found(char *buffer);
 
 #endif
