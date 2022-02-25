@@ -27,6 +27,8 @@ int main(int argc, char **argv)
 	{
 		// opening the file and printing line by line
 		int 			fd = open(argv[1], O_RDONLY);
+		if (fd)
+			printf("========== File Opened succesfully ==========\n\n");
 		while (current_line = get_next_line(fd))
 		{
 			printf("Line number %ld: %s\n", line_number, current_line);
