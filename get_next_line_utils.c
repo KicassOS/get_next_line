@@ -6,7 +6,7 @@
 /*   By: pszleper <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 16:24:53 by pszleper          #+#    #+#             */
-/*   Updated: 2022/03/03 07:19:30 by pszleper         ###   ########.fr       */
+/*   Updated: 2022/03/08 16:21:27 by pszleper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,13 @@ size_t	ft_nl_index(char *buffer)
 		i++;
 	}
 	return (-1);
+}
+
+void	ft_free(char **p)
+{
+	if (p && *p)
+	{
+		free(*p);
+		*p = NULL;
+	}
 }

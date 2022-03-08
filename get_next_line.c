@@ -6,7 +6,7 @@
 /*   By: pszleper <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 16:24:56 by pszleper          #+#    #+#             */
-/*   Updated: 2022/03/05 15:18:45 by pszleper         ###   ########.fr       */
+/*   Updated: 2022/03/08 00:01:11 by pszleper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*get_next_line(int fd)
 	ssize_t		bytes_read;
 	ssize_t		nl_index;
 
-	if (fd < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	line = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	if (!line)
