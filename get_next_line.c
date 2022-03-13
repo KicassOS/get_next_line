@@ -6,7 +6,7 @@
 /*   By: pszleper <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 16:24:56 by pszleper          #+#    #+#             */
-/*   Updated: 2022/03/08 00:01:11 by pszleper         ###   ########.fr       */
+/*   Updated: 2022/03/13 21:12:07 by pszleper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,53 +15,51 @@
 #include <stdio.h>
 char	*get_next_line(int fd)
 {
-	char		*line;
-	static char	*stash;
-	ssize_t		bytes_read;
-	ssize_t		nl_index;
+	static char	*line;
+	char		*buffer;
+	long long	position;
+	long long	bytes_read;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	line = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
-	if (!line)
-		return (NULL);
-	bytes_read = 1;
-	while (bytes_read && ft_no_newline_found(line))
+	buffer = NULL;
+	position = ft_strchr_flag(line, '\n', 0);
+	while (position == -1 && position != -5)
 	{
-		bytes_read = read(fd, line, BUFFER_SIZE);
-		if (bytes_read == -1 || bytes_read == 0)
+		buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+		if (!buffer)
 			return (NULL);
-		nl_index = ft_nl_index(line);
-		if (nl_index >= 0)
-		{
-			if (!ft_stash(stash, line, bytes_read - nl_index, nl_index))
-				return (NULL);
-			return (line);
-		}
+		bytes_read = read(fd, buffer, BUFFER_SIZE);
+		if (bytes_read == -1 || bytes_read == 0)
+			break;
+		line = ft_strjoin(line, buffer);
+		position = ft_strchr_flag(line, '\n', 1);
+		ft_free(&buffer);
 	}
-	return (0);
+	ft_free(&buffer);
+	return (ft_output(&line, position, bytes_read));
 }
 
-char	ft_stash(char *stash, char *line, ssize_t stash_size, ssize_t nl_index)
+char	*ft_output(char **line, int position, int bytes_read)
 {
-	size_t	i;
-	printf("Executing ft_stash... ");
-	if (!stash)
+	char	*current_line;
+
+	if ((bytes_read == 0 || bytes_read == -1) && !*line || position == -5)
 	{
-		stash = ft_calloc(stash_size, sizeof(char));
-		if (!stash)
-			return (0);
-		printf("ft_stash malloced successfully\n");
+		if (*line)
+			return (*line);
+		return (NULL);
 	}
-	i = 0;
-	printf("Before loop: nl_index: %ld, line[%ld]: %c\n", i, i, line[i]);
-	while (i < nl_index && line[i])
-	{
-		stash[i] = line[i];
-		printf("line[i]: %c, stash[i]: %c, i: %ld\n", line[i], stash[i], i);
-		i++;
-	}
-	printf("stash: %s$^$\n", stash);
-	return (1);
+	if (position == -1)
+		position = ft_strlen(line);
+	else
+		position++;
+	line = ft_strdup(line, position);
+	if (position == ft_strlen(line))
+		ft_free(line);
+	else
+		line = ft_update_nl(line, position);
+	return (line);
 }
+
 
