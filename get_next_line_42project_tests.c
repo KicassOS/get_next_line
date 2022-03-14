@@ -36,14 +36,5 @@ int main(int argc, char **argv)
 		}
 		close(fd);
 	}
-	else
-	{
-		// get next line from standard input
-		while ((current_line = get_next_line(1)))
-		{
-			printf("Line number %ld: %s\n", line_number, current_line);
-			line_number++;
-		}
-	}
 	return (0);
 }
