@@ -6,7 +6,7 @@
 /*   By: pszleper <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 16:24:56 by pszleper          #+#    #+#             */
-/*   Updated: 2022/03/14 04:37:35 by pszleper         ###   ########.fr       */
+/*   Updated: 2022/03/14 04:53:08 by pszleper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char	*ft_output(char **line, int position, int bytes_read)
 {
 	char	*current_line;
 
-	if ((bytes_read == 0 || bytes_read == -1) && !*line || position == -5)
+	if (((bytes_read == 0 || bytes_read == -1) && !*line) || position == -5)
 	{
 		if (*line)
 			return (*line);

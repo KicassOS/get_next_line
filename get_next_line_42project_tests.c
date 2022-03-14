@@ -29,7 +29,7 @@ int main(int argc, char **argv)
 		int 			fd = open(argv[1], O_RDONLY);
 		if (fd)
 			printf("========== File Opened succesfully ==========\n\n");
-		while (current_line = get_next_line(fd))
+		while ((current_line = get_next_line(fd)))
 		{
 			printf("Line number %ld: %s\n", line_number, current_line);
 			line_number++;
@@ -39,7 +39,7 @@ int main(int argc, char **argv)
 	else
 	{
 		// get next line from standard input
-		while (current_line = get_next_line(1))
+		while ((current_line = get_next_line(1)))
 		{
 			printf("Line number %ld: %s\n", line_number, current_line);
 			line_number++;
