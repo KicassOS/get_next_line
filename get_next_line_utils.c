@@ -6,7 +6,7 @@
 /*   By: pszleper <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 16:24:53 by pszleper          #+#    #+#             */
-/*   Updated: 2022/03/08 16:21:27 by pszleper         ###   ########.fr       */
+/*   Updated: 2022/03/14 04:36:19 by pszleper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,52 +29,29 @@ void	*ft_calloc(size_t count, size_t size)
 	return (ptr);
 }
 
-size_t	ft_line_length(const char *str)
+int	ft_strlen(char *s)
 {
-	size_t	len;
+	int	i;
 
-	len = 0;
-	if (!str || !str[len])
+	i = 0;
+	if (!s)
 		return (0);
-	while (str[len])
-	{
-		if (len > 0)
-		{
-			if (str[len - 1] == '\n')
-				break ;
-		}
-		len++;
-	}
-	return (len);
+	while (s && s[i])
+		i++;
+	return (i);
 }
 
-char	ft_no_newline_found(char *buffer)
+int	ft_strchr_flag(char *s, int c, int flag)
 {
-	size_t	length;
-	size_t	i;
+	int	i;
 
-	length = ft_line_length(buffer);
+	if (flag == 1 && !s)
+		return (-2);
 	i = 0;
-	while (i < length)
+	while (s && s[i])
 	{
-		if (buffer[i++] == '\n')
-			return (0);
-	}
-	return (1);
-}
-
-size_t	ft_nl_index(char *buffer)
-{
-	size_t	line_length;
-	size_t	i;
-
-	i = 0;
-	while (buffer[i])
-	{
-		if (buffer[i] == '\n')
-		{
+		if (s[i] == c)
 			return (i);
-		}
 		i++;
 	}
 	return (-1);
@@ -87,4 +64,33 @@ void	ft_free(char **p)
 		free(*p);
 		*p = NULL;
 	}
+}
+
+char	*ft_strnjoin(char *s1, char *s2, int n)
+{
+	char	*output;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	if (s2[j] == '\0')
+		return (NULL);
+	output = malloc(ft_strlen(s1) + n + 1);
+	if (!output)
+		return (NULL);
+	if (s1 != NULL)
+	{
+		while (s1[i] != '\0')
+		{
+			output[i] = s1[i];
+			i++;
+		}
+	}
+	while (s2 && s2[j] != '\0' && j < n)
+		output[i++] = s2[j++];
+	output[i] = '\0';
+	if (s1)
+		ft_free(&s1);
+	return (output);
 }
