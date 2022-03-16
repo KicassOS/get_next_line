@@ -6,7 +6,7 @@
 /*   By: pszleper <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 16:24:53 by pszleper          #+#    #+#             */
-/*   Updated: 2022/03/14 04:36:19 by pszleper         ###   ########.fr       */
+/*   Updated: 2022/03/16 05:33:10 by pszleper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,15 +79,15 @@ char	*ft_strnjoin(char *s1, char *s2, int n)
 	output = malloc(ft_strlen(s1) + n + 1);
 	if (!output)
 		return (NULL);
-	if (s1 != NULL)
+	if (s1)
 	{
-		while (s1[i] != '\0')
+		while (s1[i])
 		{
 			output[i] = s1[i];
 			i++;
 		}
 	}
-	while (s2 && s2[j] != '\0' && j < n)
+	while (s2 && s2[j] && j < n)
 		output[i++] = s2[j++];
 	output[i] = '\0';
 	if (s1)
