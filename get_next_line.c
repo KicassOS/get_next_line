@@ -6,7 +6,7 @@
 /*   By: pszleper <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 16:24:56 by pszleper          #+#    #+#             */
-/*   Updated: 2022/03/16 05:33:14 by pszleper         ###   ########.fr       */
+/*   Updated: 2022/03/16 05:40:57 by pszleper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,7 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	line = NULL;
 	buffer = NULL;
-	position = 0;
 	position = ft_strchr_flag(line, '\n', 0);
 	while (position == -1 && position != -2)
 	{
