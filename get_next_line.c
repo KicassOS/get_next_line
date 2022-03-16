@@ -6,12 +6,18 @@
 /*   By: pszleper <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 16:24:56 by pszleper          #+#    #+#             */
-/*   Updated: 2022/03/16 05:40:57 by pszleper         ###   ########.fr       */
+/*   Updated: 2022/03/16 06:03:20 by pszleper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
+// buffer is used to store the result of read
+// bytes_read is fed into strndup and strnjoin to prevent segfaults
+// and is also used for error checking
+// line stores the past reads who didnt contain a NL
+// position is -1 if no '\n' is found and is -2 if line is NULL
+// it is used to determine if we've read the whole line or not
 char	*get_next_line(int fd)
 {
 	static char	*line;
@@ -39,6 +45,8 @@ char	*get_next_line(int fd)
 	return (ft_output(&line, position, bytes_read));
 }
 
+// stores characters until EOF or NL is found
+// calls ft_update_nl if the NL is found and the whole line hasn't been read
 char	*ft_output(char **line, int position, int bytes_read)
 {
 	char	*current_line;
@@ -61,6 +69,7 @@ char	*ft_output(char **line, int position, int bytes_read)
 	return (current_line);
 }
 
+// glues the remainder of the line to what was previously allocated
 char	*ft_update_nl_pos(char **line, int position)
 {
 	char	*tmp;
@@ -73,6 +82,8 @@ char	*ft_update_nl_pos(char **line, int position)
 	return (*line);
 }
 
+// same as libft, but only copies n characters
+// once again to be safe against segfaults
 char	*ft_strndup(char *input, int n)
 {
 	char	*output;

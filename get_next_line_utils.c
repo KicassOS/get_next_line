@@ -6,12 +6,13 @@
 /*   By: pszleper <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 16:24:53 by pszleper          #+#    #+#             */
-/*   Updated: 2022/03/16 05:33:10 by pszleper         ###   ########.fr       */
+/*   Updated: 2022/03/16 05:53:43 by pszleper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
+// libft copy-paste
 void	*ft_calloc(size_t count, size_t size)
 {
 	char		*ptr;
@@ -29,6 +30,7 @@ void	*ft_calloc(size_t count, size_t size)
 	return (ptr);
 }
 
+// same as in libft but doesn't segfault when the address of  s is NULL
 int	ft_strlen(char *s)
 {
 	int	i;
@@ -41,6 +43,10 @@ int	ft_strlen(char *s)
 	return (i);
 }
 
+// finds char c in s, returning its' position
+// flag is used to reduce the number of lines to pass the norm but it's messy
+// the -2 return is used to terminate the main loop once EOF is reached
+// the -1 is used for the absence of newline, telling gnl to read more
 int	ft_strchr_flag(char *s, int c, int flag)
 {
 	int	i;
@@ -57,6 +63,7 @@ int	ft_strchr_flag(char *s, int c, int flag)
 	return (-1);
 }
 
+// frees memory and sets pointer address to NULL to prevent potential segfaults
 void	ft_free(char **p)
 {
 	if (p && *p)
@@ -66,6 +73,8 @@ void	ft_free(char **p)
 	}
 }
 
+// same as libft, but only copies n chars to prevent segfaults
+// used to append the newly read content to the line that has to be returned
 char	*ft_strnjoin(char *s1, char *s2, int n)
 {
 	char	*output;
